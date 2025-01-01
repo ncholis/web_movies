@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Movie List{% endblock title %}
+
+{% block content %}
+<form method="get">
+    <input type="text" name="q" placeholder="Search movies...">
+    <button type="submit">Search</button>
+</form>
+<hr>
+<h1>Popular Movies this month</h1>
+<div class="movie-container">
+    {% for movie in movies %}
+    <div class="movie-card">
+        <img src="{{ movie.image.url }}" alt="{{ movie.name }}">
+        <a class="movie-title" href="movie/{{ movie.id }}/">
+            <h3><strong>{{ movie.name }}</strong></h3>
+        </a>
+        <p>
+            {{ movie.duration }} Min <br>
+            User Rating: {{ movie.user_rating }}
+        </p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}{{ movie.title }}{% endblock title %}
+
+{% block style %}
+<style>
+    .movie-detail {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        align-items: flex-start;
+        margin-top: 20px;
+    }
+
+    .movie-detail-image {
+        flex: 1 1 300px;
+        max-width: 300px;
+    }
+    .movie-detail-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .movie-detail-info {
+        flex: 2 1 600px;
+    }
+    .movie-detail-info h1 {
+        font-size: 2em;
+        margin-bottom: 10px;
+        color: #333;
+    }
+    .movie-detail-info p {
+        font-size: 1em;
+        color: #555;
+        margin: 8px 0;
+    }
+    .movie-detail-info .back-link {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 15px;
+        background-color: #007BFF;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    .movie-detail-info .back-link:hover {
+        background-color: #0056b3;
+    }
+</style>
+{% endblock style %}
+
+{% block content %}
+<button>
+    <a href="/" style="display: inline-block; text-decoration: none; color: black;">Back</a>
+</button>
+<h1>{{ movie.name }}</h1>
+<div class="movie-detail">
+    <div class="movie-detail-image">
+        <img src="{{ movie.image.url }}" alt="{{ movie.title }}">
+    </div>
+    <div class="movie-detail-info">
+        <h2> Details </h2>
+        <p><strong>Genre:</strong> {% for genre in movie.genre.all %} {{ genre }} {% endfor %}</p>
+        <p><strong>Language:</strong> {{ movie.language }}</p>
+        <p><strong>Duration:</strong> {{ movie.duration }}</p>
+        <p><strong>User Rating:</strong> {{ movie.user_rating }}</p>
+        <h3> Synopsis </h3>
+        <p> {{ movie.description }}</p>
+    </div>
+</div>
+{% endblock content %}
